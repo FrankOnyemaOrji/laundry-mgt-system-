@@ -54,7 +54,7 @@ The API has the following endpoints:
 
 To run the tests, use the following command:
  - ```
-    pytest
+    python -m unittest test
     ```
 ## Contributing
 
