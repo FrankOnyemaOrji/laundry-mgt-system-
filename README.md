@@ -64,6 +64,9 @@ Please read `CONTRIBUTING.md` for details on our code of conduct, and the proces
 
 This project is licensed under the MIT License - see the `LICENSE.md` file for details.
 
+## Project Software Requirement Specification
+- [Software Requirement Specification](https://docs.google.com/document/d/16-_K1VLh6a5CflWScxuNFYzUSx9IDAVaHf_0zFmXDUE/edit?usp=sharing)
+
 ## Contact
 
 If you want to contact me you can reach me at `f.orji@alustudent.com`.
