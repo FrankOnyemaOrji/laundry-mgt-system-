@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Clone the repository:
     ```
-    git clone https://github.com/yourusername/laundry-mgt-system.git
+    git clone https://github.com/FrankOnyemaOrji/laundry-mgt-system.git
     ```
 2. Change into the project directory:
     ```
