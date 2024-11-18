@@ -26,6 +26,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
 
+    - name: Verify dependencies
+      run: |
+        pip list
+
     - name: Run tests
       run: |
-        pytest
+        python -m unittest discover -s backend/API/test -p "*.py"
