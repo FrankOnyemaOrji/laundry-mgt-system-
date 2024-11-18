@@ -25,7 +25,7 @@ class Order(db.Model):
     order_details = db.Column(db.String(100), nullable=False)
     order_address = db.Column(db.String(100), nullable=False)
     quantity = db.Column(db.Integer(), default=1)
-    customer_id = db.Column(db.String(50), db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.String(50), db.ForeignKey('users.id'), nullable=False)
 
     def __repr__(self):
         return f'<Order {self.id}>'

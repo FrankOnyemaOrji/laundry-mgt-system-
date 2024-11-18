@@ -8,6 +8,30 @@ This is a robust API for a Laundry Management System. It's built with Python, Fl
 - Admin functionality
 - Order management
 
+# Laundry Management System
+
+## Authentication Endpoints
+
+- **DELETE** `/auth/delete_user/{user_id}`: Delete a user.
+- **POST** `/auth/login`: Login a user.
+- **POST** `/auth/logout`: Logout a user.
+- **POST** `/auth/register`: Register a new user.
+- **PATCH** `/auth/update_user_details`: Update user details.
+- **GET** `/auth/users`: Get all users.
+
+## Admin Endpoints
+- **POST** `/admin/login`: Login an admin.
+- **POST** `/admin/register`: Register a new admin.
+- **PATCH** `/admin/update_admin_details/{admin_id}`: Update admin details.
+
+## Order Endpoints
+
+- **POST** `/order/create_order`: Create a new order.
+- **PATCH** `/order/order/status/{order_id}`: Update order status.
+- **DELETE** `/order/order/{order_id}`: Delete an order.
+- **GET** `/order/user/{user_id}/orders`: Get all orders.
+- **GET** `/order/user/{user_id}/orders/{order_id}`: Get a specific order.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

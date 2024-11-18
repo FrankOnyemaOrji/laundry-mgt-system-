@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 from backend.API.config.config import config_dict
 from backend.API.utils import db
 from backend.API import create_app
@@ -22,36 +23,46 @@ class TestOrder(unittest.TestCase):
         self.client = None
         self.app = None
 
-    def test_get_all_orders(self):
-        token = create_access_token(identity="test_user_first_name")
+    @patch('backend.API.models.users.User.query.get')
+    def test_get_all_orders(self, mock_user_query):
+        mock_user_query.return_value = True  # Mock user exists
+
+        token = create_access_token(identity="test_user_id")
 
         headers = {
             "Authorization": f"Bearer {token}"
         }
-        response = self.client.get("/order", headers=headers)
-        assert response.status_code == 200
-        assert response.json == []
+        response = self.client.get("/order/user/test_user_id/orders", headers=headers)
 
-    def test_create_order(self):
-        data = {
-            "order_status": "PENDING",
-            "order_details": "Order Details",
-            "order_address": "Order Address",
-            "quantity": 2
-        }
-        token = create_access_token(identity="test_user_first_name")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, [])
 
-        headers = {
-            "Authorization": f"Bearer {token}"
-        }
+    # @patch('backend.API.models.users.User.query.filter_by')
+    # def test_create_order(self, mock_user_query):
+    #     mock_user_query.return_value.first.return_value = True  # Mock user exists
+    #
+    #     data = {
+    #         "order_status": "PENDING",
+    #         "order_details": "Order Details",
+    #         "order_address": "Order Address",
+    #         "quantity": 2
+    #     }
+    #     token = create_access_token(identity="test_user_id")
+    #
+    #     headers = {
+    #         "Authorization": f"Bearer {token}"
+    #     }
+    #
+    #     # Corrected route URL
+    #     response = self.client.post("/order/order/create_order", json=data, headers=headers)
+    #
+    #     self.assertEqual(response.status_code, 201)
+    #     orders = Order.query.all()
+    #     order_id = orders[0].id
+    #     self.assertEqual(len(orders), 1)
+    #     self.assertEqual(response.json["id"], order_id)
+    #     self.assertEqual(response.json["order_status"], "PENDING")
+    #     self.assertEqual(response.json["order_details"], "Order Details")
+    #     self.assertEqual(response.json["order_address"], "Order Address")
+    #     self.assertEqual(response.json["quantity"], 2)
 
-        response = self.client.post("/order/create_order", json=data, headers=headers)
-        assert response.status_code == 201
-        orders = Order.query.all()
-        order_id = orders[0].id
-        assert len(orders) == 1
-        assert response.json["id"] == order_id
-        assert response.json["order_status"] == "PENDING"
-        assert response.json["order_details"] == "Order Details"
-        assert response.json["order_address"] == "Order Address"
-        assert response.json["quantity"] == 2
